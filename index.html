@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="./node_modules/web3/dist/web3.min.js"></script>
+</head>
+<body>
+
+        <input id="input" type = "text"> 
+        <button id="button">Set</button>
+        
+        <pre id="output">
+            
+        </pre>
+        
+<script>
+          var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));  
+        web3.eth.defaultAccount = web3.eth.accounts[0];
+        var fooContract = web3.eth.contract([
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "rollNo",
+				"type": "uint256"
+			},
+			{
+				"name": "nm",
+				"type": "string"
+			},
+			{
+				"name": "gp",
+				"type": "string"
+			}
+		],
+		"name": "addStudent",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "rollNo",
+				"type": "uint256"
+			}
+		],
+		"name": "getStudent",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+])
+
+var foo = fooContract.at('0xaf156c3da18fdb058d7e3bc68a115e48316b863d');
+
+var input = document.getElementById('input');
+var button = document.getElementById('button');
+var output = document.getElementById('output');
+
+button.addEventListener('click', function(){
+    foo.addStudent(input.value);
+
+    output.innerhtml = web3foo.getStudent();
+});
+    </script>
+</body>
+
+
+</html>
